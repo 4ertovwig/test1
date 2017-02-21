@@ -37,18 +37,24 @@ int main(int argc, char *argv[]) {
 		std::ofstream os("boost");
 		std::ofstream oss("cookbook.pdf");
 
-		coroutine<void>::push_type coroutine1(std::bind(&client::GetHtmlPagePseudoAsync,			                                       &c,
+		coroutine<void>::push_type coroutine1(std::bind(&client::GetHtmlPagePseudoAsync,			                                      
+						      &c,
 	                                              std::placeholders::_1,
 						      std::ref(io1),
 						      "boost.org",
-						      "/",												      std::ref(os)));																				coroutine<void>::push_type coroutine2(std::bind(&client::GetHtmlPagePseudoAsync,
-						      &c,									                              std::placeholders::_1,
+						      "/",
+						      std::ref(os)));
+		coroutine<void>::push_type coroutine2(std::bind(&client::GetHtmlPagePseudoAsync,
+						      &c,									                              
+						      std::placeholders::_1,
 						      std::ref(io1),
 						      "ebooksbucket.com",
-						      "/uploads/itprogramming/cplus/Boost_Cplusplus_Application_Development_Cookbook.pdf",															      std::ref(oss)));
+						      "/uploads/itprogramming/cplus/Boost_Cplusplus_Application_Development_Cookbook.pdf",													    std::ref(oss)));
 						      
-		while (coroutine1 || coroutine2) {									        if(coroutine1)	
-				coroutine1();																								if(coroutine2)										                  coroutine2(); 
+		while (coroutine1 || coroutine2) {									   
+			if(coroutine1)	
+				coroutine1();																					      if(coroutine2)										                  
+				coroutine2(); 
 		}
 	}
 	return 0;
