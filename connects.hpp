@@ -146,7 +146,8 @@ public:
     */
     template<typename...Arg>
     static ptr create(Arg&&...args) {
-        return ptr(new asynchronous_connect(std::forward<Arg>(args)...));
+        //return ptr(new asynchronous_connect(std::forward<Arg>(args)...));
+	return std::make_shared<asynchronous_connect>(std::forward<Arg>(args)...);
     }
 
     asynchronous_connect(
