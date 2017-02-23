@@ -53,7 +53,8 @@ int main(int argc, char *argv[]) {
 						      
 		while (coroutine1 || coroutine2) {									   
 			if(coroutine1)	
-				coroutine1();																					      if(coroutine2)										                  
+				coroutine1();																					      
+			if(coroutine2)
 				coroutine2(); 
 		}
 	}
